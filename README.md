@@ -1,1 +1,168 @@
+```
+    🔑🔑🔑🔑🔑🔑🔑🔑🔑🔑🔑🔑🔑🔑🔑🔑🔑🔑🔑🔑🔑🔑🔑🔑🔑🔑🔑🔑🔑🔑🔑🔑🔑🔑
+    ████████╗███████╗ █████╗ ███╗   ███╗   ██████╗ ███████╗ ██████╗ ██████╗ ██████╗ ███████╗    [ SYSTEM: ONLINE   ] 
+    ╚══██╔══╝██╔════╝██╔══██╗████╗ ████║   ██╔══██╗██╔════╝██╔════╝██╔═══██╗██╔══██╗██╔════╝    [ ENCRYPTION: ACTIVE ] 
+       ██║   █████╗  ███████║██╔████╔██║   ██║  ██║█████╗  ██║     ██║   ██║██║  ██║█████╗      [ CONNECTION: SECURE ] 
+       ██║   ██╔══╝  ██╔══██║██║╚██╔╝██║   ██║  ██║██╔══╝  ██║     ██║   ██║██║  ██║██╔══╝      [ ACCESS: GRANTED    ] 
+       ██║   ███████╗██║  ██║██║ ╚═╝ ██║   ██████╔╝███████╗╚██████╗╚██████╔╝██████╔╝███████╗    [ ROOT@TEAM-DECODE:~ ] 
+       ╚═╝   ╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝   ╚═════╝ ╚══════╝ ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝    
+    🔑🔑🔑🔑🔑🔑🔑🔑🔑🔑🔑🔑🔑🔑🔑🔑🔑🔑🔑🔑🔑🔑🔑🔑🔑🔑🔑🔑🔑🔑🔑🔑🔑🔑
+```
+
 # TEAM-DECODE
+
+CRYPTO UTILITY — SECURE MULTIBASE DECODER 🔑  /   20+ encodings • smart heuristics • safe preview
+
+เครื่องมือ Python สำหรับถอดรหัสข้อความที่เข้ารหัสหรือบีบอัดซ้อนกันหลายชั้นในสไตล์ CTF / Cybersec
+
+## Overview
+
+TEAM-DECODE.py คือ utility ที่ออกแบบมาเพื่อรับ input เป็นข้อความที่ถูกเข้ารหัสหรือบีบอัดหลายชั้น แล้วพยายามถอดกลับจนได้ plaintext ที่อ่านออกได้โดยอัตโนมัติ
+
+- รองรับการถอดแบบ multi-layer
+- ใช้ heuristics และ scoring เพื่อคัด candidate ที่มีโอกาสเป็น plaintext มากที่สุด
+- ไม่ต้องรู้ล่วงหน้าว่า encoder หรือ compression format ไหนถูกใช้
+- เหมาะสำหรับงาน CTF, reverse engineering, forensic และ pentest
+
+## Features ใหม่
+
+- รองรับการถอดแบบอัตโนมัติหลายชั้นแบบเรียงลำดับ candidate
+- รองรับ encoding/decoding มากกว่า 20 รูปแบบ
+- รองรับ compression format ยอดนิยม เช่น gzip, zlib, bzip2, xz, zstd
+- รองรับ base100, quoted-printable, xor single-byte, reverse, rot47 และ atbash
+- มีโหมด interactive CLI สำหรับใช้งานแบบสด ๆ
+- มีคำสั่ง manual สำหรับ railfence, vigenere และ columnar
+- มีตัวเลือก `--show-candidates` เพื่อดู candidate อันดับต้นแบบละเอียด
+- มีระบบ scoring และ bonus ที่ช่วยให้ผลลัพธ์ที่เป็น flag-style น่าเชื่อถือขึ้น
+
+## Supported Encoding Schemes
+
+### Base / Radix
+- `base2`
+- `base16`
+- `base32` (standard + forgiving separators + unpadded)
+- `base32hex`
+- `base36`
+- `base45`
+- `base58`
+- `base62`
+- `base64`
+- `base64url`
+- `base100`
+
+### High-radix / ASCII encodings
+- `base85`
+- `ascii85`
+- `z85`
+- `base91`
+- `base92`
+
+### Compression
+- `gzip`
+- `zlib`
+- `bzip2`
+- `xz`
+- `zstd` (optional)
+
+### Text / Substitution
+- `morse`
+- `url`
+- `quoted_printable`
+- `rotN` / all ROT shifts
+- `rot47`
+- `atbash`
+- `xor_singlebyte`
+- `reverse`
+
+### Manual Commands
+- `railfence <rails> <text>`
+- `vigenere <key> <text>`
+- `columnar <width> <text>`
+
+## Installation
+
+1. Clone หรือ copy ไฟล์ไปไว้ใน repository ของคุณ
+2. ตรวจสอบ Python 3.11+ หรือ Python 3.13 ขึ้นไป
+3. ติดตั้ง optional dependency สำหรับ zstandard (ถ้าต้องการ)
+
+```bash
+python -m pip install zstandard
+```
+
+`zstandard` เป็น dependency เสริม ถ้าไม่มีเครื่องมือยังทำงานได้โดยไม่ต้องติดตั้ง
+
+## Usage
+
+### Run interactive mode
+
+```bash
+python TEAM-DECODE.py
+```
+
+### Decode from command line
+
+```bash
+python TEAM-DECODE.py "<encoded string>"
+```
+
+### Read from file
+
+```bash
+python TEAM-DECODE.py -f encoded.txt
+```
+
+### ปรับความลึกและ beam size
+
+```bash
+python TEAM-DECODE.py "<encoded string>" -m 15 -b 320
+```
+
+### แสดง candidate เพิ่มเติม
+
+```bash
+python TEAM-DECODE.py "<encoded string>" --show-candidates
+```
+
+## Magic Mode
+
+โหมด "Magic Mode" ในที่นี้หมายถึงชุด heuristics ที่ออกแบบมาเพื่อจับ pattern CTF/Cyber ได้ดีขึ้น:
+
+- ให้โบนัสกับข้อความที่มีลักษณะ `CTF{...}` และคำสำคัญทางความปลอดภัย
+- ให้คะแนนสูงขึ้นกับสตริงที่มีตัวอักษร+ตัวเลขพร้อม `_`, `-`, `{`, `}`
+- ลดน้ำหนัก chain ที่ไม่ใช่ plaintext ยาว ๆ แต่ไม่มี structure
+- ปรับแต่งกลไกให้ชอบ chain ที่มีโอกาสเป็น flag แบบ multi-layer มากขึ้น
+- ควบคุมการใช้ substitution-heavy chain ให้ไม่ลุกลามเกินไป
+
+## Notes
+
+- ผลลัพธ์ขึ้นอยู่กับค่าพารามิเตอร์ `max_depth` และ `beam_size`
+- ถ้าต้องการจัดการ chain ยาว ๆ ให้เพิ่ม `-m` และ `-b`
+- ระบบนี้ออกแบบมาให้เสถียร และมุ่งเน้นการค้นหาคำตอบที่เป็นไปได้มากกว่า brute-force แบบไม่จำกัด
+
+## License
+
+This project is provided under the `SPT License`.
+
+```
+SPT License
+
+Copyright (c) 2026
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
