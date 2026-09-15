@@ -13,6 +13,8 @@
 
 CRYPTO UTILITY — SECURE MULTIBASE DECODER 🔑  /   20+ encodings • smart heuristics • safe preview
 
+Current release: `v1.1.0`
+
 เครื่องมือ Python สำหรับถอดรหัสข้อความที่เข้ารหัสหรือบีบอัดซ้อนกันหลายชั้นในสไตล์ CTF / Cybersec
 
 ## Overview
