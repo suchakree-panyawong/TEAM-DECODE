@@ -112,7 +112,10 @@ def auto_decode_beam_search(
                     else:
                         bonus += substitution_legibility_bonus(scheme, decoded)
                 new_chain = candidate.chain + (scheme,)
-                chain_penalty = total_substitution_count(new_chain) * ALWAYS_SUCCEEDS_STEP_PENALTY
+                chain_penalty = (
+                    total_substitution_count(new_chain) * ALWAYS_SUCCEEDS_STEP_PENALTY
+                    + max(0, len(new_chain) - 1) * 0.75
+                )
                 new_candidate = Candidate(text=decoded, chain=new_chain, score=base_score + bonus - chain_penalty)
                 best[decoded] = new_candidate
                 next_frontier.append(new_candidate)

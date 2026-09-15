@@ -13,7 +13,7 @@
 
 CRYPTO UTILITY — SECURE MULTIBASE DECODER 🔑  /   20+ encodings • smart heuristics • safe preview
 
-Current release: `v1.1.0`
+Current release: `v1.3.0`
 
 เครื่องมือ Python สำหรับถอดรหัสข้อความที่เข้ารหัสหรือบีบอัดซ้อนกันหลายชั้นในสไตล์ CTF / Cybersec
 
@@ -123,6 +123,10 @@ python TEAM-DECODE.py "SGVsbG8=" --scheme base64 --max-results 3 --explain
 JSON output includes a `confidence` label (`high`, `medium`, or `low`) based on
 the score gap between the top candidates. Use `--show-candidates` to inspect
 the alternatives and `--max-results` to control how many are returned.
+
+The v1.3 scoring update improves ranking for Thai plaintext, quoted-printable
+Unicode payloads, and short base32 values that were previously vulnerable to
+speculative decoder chains.
 
 ### ปรับความลึกและ beam size
 

@@ -187,7 +187,7 @@ def dictionary_confidence_bonus(text: str) -> float:
 
 THAI_CHAR_RANGE = (0x0E00, 0x0E7F)
 THAI_CHAR_MIN_RATIO, THAI_RATIO_BONUS_SCALE, THAI_WORD_BONUS_CAP = 0.3, 10.0, 5
-THAI_COMMON_WORDS = ("และ","คือ","ที่","ไม่","เป็น","การ","ใน","มี","ได้","จะ","ว่า","กับ","ของ","ให้","มา","ไป","แล้ว","นี้","นั้น","เขา","ฉัน","คุณ","เรา","ทำ","พูด","ดี","วัน","เวลา","คน","ธง","ความลับ","รหัส","ทดสอบ","ข้อความ")
+THAI_COMMON_WORDS = ("และ","คือ","ที่","ไม่","เป็น","การ","ใน","มี","ได้","จะ","ว่า","กับ","ของ","ให้","มา","ไป","แล้ว","นี้","นั้น","เขา","ฉัน","คุณ","เรา","ทำ","พูด","ดี","วัน","เวลา","คน","ธง","ความลับ","รหัส","ทดสอบ","ข้อความ","นักสืบ","ต้องการ","หลักฐาน","เพิ่มเติม","จาก","เกิดเหตุ","ระดับ","สูงสุด","ห้าม","เปิดเผย")
 
 def thai_char_ratio(text: str) -> float:
     if not text: return 0.0
@@ -482,8 +482,12 @@ def _score_parts(text: str) -> tuple:
     chi2 = english_chi_squared(text)
     cp = min(chi2 / 140.0, 6.0) if chi2 is not None else (1.5 if len(text) >= 5 else 0.0)
     db, tb = dictionary_confidence_bonus(text), thai_confidence_bonus(text)
+    if tb >= THAI_ROT_MIN_WORD_HITS:
+        cp = 0.0
     alpha_ratio = sum(ch.isalpha() for ch in text) / max(len(text), 1)
-    if re.fullmatch(r"[A-Za-z]+", text):
+    if tb >= THAI_ROT_MIN_WORD_HITS:
+        alpha_bonus = 0.0
+    elif re.fullmatch(r"[A-Za-z]+", text):
         alpha_bonus = 3.0
     elif re.fullmatch(r"[A-Za-z ]+", text):
         alpha_bonus = 1.5

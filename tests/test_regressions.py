@@ -68,6 +68,20 @@ class RegressionTests(unittest.TestCase):
         self.assertEqual(result['winner']['text'], 'Hello')
         self.assertEqual(result['winner']['confidence'], 'high')
 
+    def test_auto_decode_ranks_base32_plaintext_over_speculative_chain(self) -> None:
+        candidates = auto_decode('JVEVGU2JJ5HDSMJR', max_depth=6, beam_size=64)
+        self.assertEqual(candidates[0].text, 'MISSION911')
+
+    def test_auto_decode_ranks_thai_plaintext_over_english_heuristics(self) -> None:
+        payload = 'อัณฎืฮษ้ฑนณาฉฏชัณยาอเคิ่งเษิงบาณหี่เณิศเฏษุ'
+        candidates = auto_decode(payload, max_depth=6, beam_size=64)
+        self.assertEqual(candidates[0].text, 'นักสืบต้องการหลักฐานเพิ่มเติมจากที่เกิดเหตุ')
+
+    def test_auto_decode_ranks_quoted_printable_thai_plaintext(self) -> None:
+        payload = '=E0=B8=99=E0=B8=B1=E0=B8=81=E0=B8=AA=E0=B8=B7=E0=B8=9A=E0=B8=95=E0=B9=89=E0=\n=B8=AD=E0=B8=87=E0=B8=81=E0=B8=B2=E0=B8=A3=E0=B8=AB=E0=B8=A5=E0=B8=B1=E0=B8=\n=81=E0=B8=90=E0=B8=B2=E0=B8=99=E0=B9=80=E0=B8=9E=E0=B8=B4=E0=B9=88=E0=B8=A1=\n=E0=B9=80=E0=B8=95=E0=B8=B4=E0=B8=A1=E0=B8=88=E0=B8=B2=E0=B8=81=E0=B8=97=E0=\n=B8=B5=E0=B9=88=E0=B9=80=E0=B8=81=E0=B8=B4=E0=B8=94=E0=B9=80=E0=B8=AB=E0=B8=\n=95=E0=B8=B8'
+        candidates = auto_decode(payload, max_depth=6, beam_size=64)
+        self.assertEqual(candidates[0].text, 'นักสืบต้องการหลักฐานเพิ่มเติมจากที่เกิดเหตุ')
+
 
 if __name__ == "__main__":
     unittest.main()
