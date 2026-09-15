@@ -1,0 +1,108 @@
+{
+  "total": 60,
+  "top1_pct": 68.3,
+  "top3_pct": 83.3,
+  "found_anywhere_pct": 88.3,
+  "ranking_failures (correct candidate existed but not ranked #1)": 12,
+  "search_failures (correct candidate never generated)": 7,
+  "avg_time_s": 279.571,
+  "max_time_s": 4160.77,
+  "by_tier": {
+    "easy": {
+      "count": 20,
+      "top1": 90.0,
+      "top3": 100.0,
+      "found_anywhere": 100.0,
+      "avg_time_s": 1.925
+    },
+    "extreme": {
+      "count": 5,
+      "top1": 20.0,
+      "top3": 20.0,
+      "found_anywhere": 40.0,
+      "avg_time_s": 2492.274
+    },
+    "hard": {
+      "count": 20,
+      "top1": 50.0,
+      "top3": 75.0,
+      "found_anywhere": 80.0,
+      "avg_time_s": 210.62
+    },
+    "normal": {
+      "count": 15,
+      "top1": 80.0,
+      "top3": 93.3,
+      "found_anywhere": 100.0,
+      "avg_time_s": 4.135
+    }
+  },
+  "failure_hotspots_top20": {
+    "thai_rot": 2,
+    "base32": 1,
+    "base64url": 1,
+    "quoted_printable": 1,
+    "base16+base16": 1,
+    "base36+zlib": 1,
+    "zlib+base85": 1,
+    "gzip+base100": 1,
+    "html_numeric+base85+xor_singlebyte": 1,
+    "base32+base100": 1,
+    "base36+atbash+zlib": 1,
+    "rot13+bzip2": 1,
+    "jwt+rot13+rot13": 1,
+    "octal_escape+url+reverse": 1,
+    "thai_polybius+base45+ascii85+base64+base58": 1,
+    "base32hex+base32hex+xor_singlebyte+base2": 1,
+    "thai_polybius+xz+url+ascii85+rot5": 1,
+    "ascii85+xz+gzip+xor_singlebyte": 1
+  },
+  "slowest_cases": [
+    {
+      "input": "2d51162c242150200c320a264a1d3d2813345326282737245134011c0a26",
+      "true_chain": [
+        "ascii85",
+        "xz",
+        "gzip",
+        "xor_singlebyte"
+      ],
+      "time_s": 4160.77
+    },
+    {
+      "input": "🐧🐧🐨🐧🐧🐨🐨🐧🐧🐧🐨🐧🐧🐧🐨🐨🐧🐧🐨🐨🐧🐨🐨🐨🐧🐧🐨🐨🐧🐧🐧🐧🐧🐧🐨🐨🐨🐧🐨🐨🐧🐧🐨🐧🐧🐨🐨🐧🐧🐧🐨🐧🐧🐧🐨🐨🐧🐧🐨🐨",
+      "true_chain": [
+        "html_numeric",
+        "base2",
+        "base100"
+      ],
+      "time_s": 4153.161
+    },
+    {
+      "input": "001101010011001000110010001100100011001001100010001101010110",
+      "true_chain": [
+        "base32hex",
+        "base32hex",
+        "xor_singlebyte",
+        "base2"
+      ],
+      "time_s": 4152.984
+    },
+    {
+      "input": "/Td6WFoAAATm1rRGAgAhARYAAAB0L+Wj4ADvAGVdAHgnzgv5RyQ9L4mN361M",
+      "true_chain": [
+        "z85",
+        "gzip",
+        "base100",
+        "xz"
+      ],
+      "time_s": 4143.208
+    },
+    {
+      "input": "=E0=B8=99=E0=B8=B1=E0=B8=81=E0=B8=AA=E0=B8=B7=E0=B8=9A=E0=B8",
+      "true_chain": [
+        "quoted_printable"
+      ],
+      "time_s": 27.471
+    }
+  ]
+}

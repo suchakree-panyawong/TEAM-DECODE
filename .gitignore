@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# Run artifacts
+*.log
+benchmarks/reports/benchmark_report.json
+benchmarks/reports/benchmark_failures.json
+
+# OS
+Thumbs.db
+.DS_Store

@@ -1,0 +1,387 @@
+[
+  {
+    "tier": "easy",
+    "input": "JVEVGU2JJ5HDSMJR",
+    "expected": "MISSION911",
+    "true_chain": [
+      "base32"
+    ],
+    "mode": "exact",
+    "n_candidates": 1975,
+    "rank": 1,
+    "top1_text": "EUSK",
+    "top1_chain": [
+      "base32",
+      "xor_multibyte",
+      "rot9",
+      "base64"
+    ],
+    "time_s": 1.063,
+    "input_len": 16
+  },
+  {
+    "tier": "easy",
+    "input": "4LiW4Lit4LiU4Lij4Lir4Lix4Liq4LiC4LmJ4Lit4LiE4Lin4Liy4Lih4LiZ4Li14LmJ4LmD4Lir4LmJ4LmE4LiU4LmJ4LiB4LmI4Lit4LiZ4LmA4Lin4Lil4Liy4Lir4Lih4LiU",
+    "expected": "ถอดรหัสข้อความนี้ให้ได้ก่อนเวลาหมด",
+    "true_chain": [
+      "base64url"
+    ],
+    "mode": "exact",
+    "n_candidates": 879,
+    "rank": 1,
+    "top1_text": "elef-}<T<$tLeleb-}<(<$tvalet-}<R<$t~ale.-}<n8$t ele+)}<n8$tEele,)}<n8$tfelet-}<.<$tLele`-}<c<$tCele&)}<e<$tDele\u0016-}<T<$t=eley-}<R<$t.ele",
+    "top1_chain": [
+      "rot47",
+      "xor_multikey",
+      "reverse"
+    ],
+    "time_s": 5.725,
+    "input_len": 136
+  },
+  {
+    "tier": "normal",
+    "input": "=E0=B8=99=E0=B8=B1=E0=B8=81=E0=B8=AA=E0=B8=B7=E0=B8=9A=E0=B8=95=E0=B9=89=E0=\n=B8=AD=E0=B8=87=E0=B8=81=E0=B8=B2=E0=B8=A3=E0=B8=AB=E0=B8=A5=E0=B8=B1=E0=B8=\n=81=E0=B8=90=E0=B8=B2=E0=B8=99=E0=B9=80=E0=B8=9E=E0=B8=B4=E0=B9=88=E0=B8=A1=\n=E0=B9=80=E0=B8=95=E0=B8=B4=E0=B8=A1=E0=B8=88=E0=B8=B2=E0=B8=81=E0=B8=97=E0=\n=B8=B5=E0=B9=88=E0=B9=80=E0=B8=81=E0=B8=B4=E0=B8=94=E0=B9=80=E0=B8=AB=E0=B8=\n=95=E0=B8=B8",
+    "expected": "นักสืบต้องการหลักฐานเพิ่มเติมจากที่เกิดเหตุ",
+    "true_chain": [
+      "quoted_printable"
+    ],
+    "mode": "exact",
+    "n_candidates": 911,
+    "rank": 1,
+    "top1_text": ":E7:^?:>>:E7:^?:^6:E7:^?:?6:E7:^?:__:E7:^?:^0:E7:^?:>_:E7:^?:>2:E7:^>:?>:E7:\r:^?:_F:E7:^?:?0:E7:^?:?6:E7:^?:^5:E7:^?:_4:E7:^?:_^:E7:^?:_2:E7:^?:^6:E7:^?:\r:?6:E7:^?:>7:E7:^?:^5:E7:^?:>>:E7:^>:?7:E7:^?:>E:E7:^?:^3:E7:^>:??:E7:^?:_6:\r:E7:^>:?7:E7:^?:>2:E7:^?:^3:E7:^?:_6:E7:^?:??:E7:^?:^5:E7:^?:?6:E7:^?:>0:E7:\r:^?:^2:E7:^>:??:E7:^>:?7:E7:^?:?6:E7:^?:^3:E7:^?:>3:E7:^>:?7:E7:^?:_^:E7:^?:\r:>2:E7:^?:^?",
+    "top1_chain": [
+      "rot3",
+      "xor_multibyte"
+    ],
+    "time_s": 27.471,
+    "input_len": 397
+  },
+  {
+    "tier": "normal",
+    "input": "อัณฎืฮษ้ฑนณาฉฏชัณยาอเคิ่งเษิงบาณหี่เณิศเฏษุ",
+    "expected": "นักสืบต้องการหลักฐานเพิ่มเติมจากที่เกิดเหตุ",
+    "true_chain": [
+      "thai_rot"
+    ],
+    "mode": "exact",
+    "n_candidates": 176,
+    "rank": 1,
+    "top1_text": "อัณฎืฮษ้ฑนณาฉฏชัณยาอเคิ่งเษิงบาณหี่เณิศเฏษุ",
+    "top1_chain": [],
+    "time_s": 0.207,
+    "input_len": 43
+  },
+  {
+    "tier": "normal",
+    "input": "ฅศายวัปละตัปหูจหุตฬ้ายเผิตเฝร",
+    "expected": "ความลับระดับสูงสุดห้ามเปิดเผย",
+    "true_chain": [
+      "thai_rot"
+    ],
+    "mode": "exact",
+    "n_candidates": 176,
+    "rank": 4,
+    "top1_text": "ฅศายวัปละตัปหูจหุตฬ้ายเผิตเฝร",
+    "top1_chain": [],
+    "time_s": 0.156,
+    "input_len": 29
+  },
+  {
+    "tier": "hard",
+    "input": "34323431343334663465343235323435343134623436343135333534",
+    "expected": "BACONBREAKFAST",
+    "true_chain": [
+      "base16",
+      "base16"
+    ],
+    "mode": "exact",
+    "n_candidates": 1396,
+    "rank": 1,
+    "top1_text": "[«i?÷lqKT[Û÷Ø\u00079µ\rP¬T<°?öwÐzÌÎïÉ0S{¿\\·",
+    "top1_chain": [
+      "base58"
+    ],
+    "time_s": 1.397,
+    "input_len": 56
+  },
+  {
+    "tier": "hard",
+    "input": "eJwFwQEOgCAIAMAvBWXac9SRUWwUzSxf3x0F1jKCDbCrztU6ie8biC25HQhGyd4nQcZ2AeMaKrk4uRbP4vljuuUH9AMXLg==",
+    "expected": "https://api.th.co/v1/keys?id=42&debug=true",
+    "true_chain": [
+      "base36",
+      "zlib"
+    ],
+    "mode": "exact",
+    "n_candidates": 2059,
+    "rank": 1,
+    "top1_text": "https://api.th.co/v1/keys?idB&debug=true",
+    "top1_chain": [
+      "zlib",
+      "base36",
+      "quoted_printable"
+    ],
+    "time_s": 2.137,
+    "input_len": 96
+  },
+  {
+    "tier": "hard",
+    "input": "WlDHAb4O4zXLvG9NGp0-I7dQmcQj38FnBL>S5QW0T6c9>b5&_}N<mFQR#RD3dUriN",
+    "expected": "ประเทศไทย.th",
+    "true_chain": [
+      "zlib",
+      "base85"
+    ],
+    "mode": "exact",
+    "n_candidates": 6354,
+    "rank": 26,
+    "top1_text": "ประเทศไทย]E9",
+    "top1_chain": [
+      "base85",
+      "zlib",
+      "rot47"
+    ],
+    "time_s": 1.528,
+    "input_len": 65
+  },
+  {
+    "tier": "hard",
+    "input": "🐿🐫👪👀🐸🐻🐬🐼👠👎👦🐺🐦🐦👇🐨🐻🐸🐮🐩🐰👇👜👱👅🐻👈🐼🐸👁🐸🐧👙👈👐👂🐸🐸🐸🐸",
+    "expected": "MISSION911",
+    "true_chain": [
+      "gzip",
+      "base100"
+    ],
+    "mode": "exact",
+    "n_candidates": 2162,
+    "rank": 1,
+    "top1_text": "EUSK",
+    "top1_chain": [
+      "base100",
+      "gzip",
+      "xor_multibyte",
+      "rot9",
+      "base64"
+    ],
+    "time_s": 1.164,
+    "input_len": 40
+  },
+  {
+    "tier": "hard",
+    "input": "202f5e022229535d242b25493c19212b023158002131570c39202f5e042129535d24262a5526072a24450d0e3921324e3736202f5e045a29535d24242a3b050e292a565302352131571102202f5e045a29535d242a24455c50262b5b4b133921324e3934",
+    "expected": "AGENT007REPORT99",
+    "true_chain": [
+      "html_numeric",
+      "base85",
+      "xor_singlebyte"
+    ],
+    "mode": "exact",
+    "n_candidates": 1250,
+    "rank": -1,
+    "top1_text": "646f1e46666=171~606|610=7}5=656|46751<446575134}7=646f1e40656=171~60626s1162436s60014~4e7=65760e7372646f1e401s6=171~60606s7|414e6=6s121746716575135546646f1e401s6=171~606s60011}14626|1|0|577=65760e7=70",
+    "top1_chain": [
+      "rot4",
+      "xor_multibyte"
+    ],
+    "time_s": 13.436,
+    "input_len": 200
+  },
+  {
+    "tier": "hard",
+    "input": "👀🐽🐾🐽🐸👊🐺🐹🐾🐬🐹🐽🐼👈👂👎👁🐫👑🐻🐼",
+    "expected": "ALPHA7BRAVO22",
+    "true_chain": [
+      "base32",
+      "base100"
+    ],
+    "mode": "exact",
+    "n_candidates": 1854,
+    "rank": 2,
+    "top1_text": "TEA_T1UOTK@44",
+    "top1_chain": [
+      "base100",
+      "base32",
+      "rot9",
+      "xor_multibyte"
+    ],
+    "time_s": 0.852,
+    "input_len": 21
+  },
+  {
+    "tier": "hard",
+    "input": "eJwFwQsChBAQANArIX0cZ4gSiVlDOf2+9yv6WRyLxZ4TllRB8/2F6fFiJhMWA/JMZP04/OA4LrOblfvKqdmMTQyTZHBL5Ta0+SrvzAyvBKzkb2tsWwE1wkqTy6Rl77EbXeFgWIMI8VMnkzeLOakdO16iQJfWKU39p/zNH4h/DTc6BA==",
+    "expected": "ถอดรหัสข้อความนี้ให้ได้ก่อนเวลาหมด",
+    "true_chain": [
+      "base36",
+      "atbash",
+      "zlib"
+    ],
+    "mode": "exact",
+    "n_candidates": 1636,
+    "rank": -1,
+    "top1_text": "\" 8>g2a= 94b# ?X`0)5b>3cd$7:g75e4?$93+13+`#+;707f`3%`$'9!#'c+7?e:2g%`9:'d; )da7`%$5a !(i'aif5#8#5f$b2!$8e&&=&78Qa#%:c:=(h4ae<a=!?h0#&#;c 5&e92h8$&\"h3<`>5=",
+    "top1_chain": [
+      "zlib",
+      "xor_multibyte",
+      "rot5",
+      "url"
+    ],
+    "time_s": 4.087,
+    "input_len": 176
+  },
+  {
+    "tier": "hard",
+    "input": "QlpoOTFBWSZTWYD7pKQAAAmbgEABa8BAADOBMwAgACKYjJkNDIUwmmgNMSHNjEEwlCWysYlxJ2/KzHQgriqhPxdyRThQkID7pKQ=",
+    "expected": "Coordinates 13.7563 north 100.5018 east",
+    "true_chain": [
+      "rot13",
+      "bzip2"
+    ],
+    "mode": "exact",
+    "n_candidates": 1749,
+    "rank": 1,
+    "top1_text": "Coordinates 68.2018 north 655.0563 east",
+    "top1_chain": [
+      "bzip2",
+      "rot18"
+    ],
+    "time_s": 1.886,
+    "input_len": 100
+  },
+  {
+    "tier": "hard",
+    "input": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtc2ciOiJodHRwczovL2V4YW1wbGUuY29tL3NlYXJjaD9xPWRlY29kZStub3ciLCJpc3MiOiJiZW5jaCJ9.4qEC0txvIJe8HwVoD2jn2dnLZenu3TwPVsfebqa_sL0",
+    "expected": "https://example.com/search?q=decode+now",
+    "true_chain": [
+      "jwt",
+      "rot13",
+      "rot13"
+    ],
+    "mode": "exact",
+    "n_candidates": 1500,
+    "rank": -1,
+    "top1_text": "header: {\"alg\":\"HS256\",\"typ\":\"JWT\"} | payload: {\"msg\":\"https://example.com/search?q=decode+now\",\"iss\":\"bench\"}",
+    "top1_chain": [
+      "jwt"
+    ],
+    "time_s": 2.331,
+    "input_len": 165
+  },
+  {
+    "tier": "hard",
+    "input": "17C5%17C5%421C5%221C5%711C5%021C5%501C5%221C5%76C5%06C5%06C5%421C5%611C5%501C5%701C5%101C5%",
+    "expected": "AGENT007REPORT99",
+    "true_chain": [
+      "octal_escape",
+      "url",
+      "reverse"
+    ],
+    "mode": "exact",
+    "n_candidates": 712,
+    "rank": -1,
+    "top1_text": "4?E=-4?E=-<:4E=-::4E=-?44E=-3:4E=-4E=-::4E=-?>E=-3>E=-3>E=-<:4E=->44E=-4E=-?34E=-434E=-",
+    "top1_chain": [
+      "rot16",
+      "xor_multibyte",
+      "rot5",
+      "quoted_printable"
+    ],
+    "time_s": 6.794,
+    "input_len": 91
+  },
+  {
+    "tier": "extreme",
+    "input": "KXjtneUS2KJ3zP9NnXRKYar4H7qmhwM2qoKadyC3Ak3CpsdefaDDvAfsUy7EnhqScYREvtL",
+    "expected": "ณณณณณณณณณณ",
+    "true_chain": [
+      "thai_polybius",
+      "base45",
+      "ascii85",
+      "base64",
+      "base58"
+    ],
+    "mode": "exact",
+    "n_candidates": 2323,
+    "rank": 4,
+    "top1_text": "wWuwWuwWuwWuwWu",
+    "top1_chain": [
+      "base58",
+      "base64",
+      "ascii85",
+      "rot16",
+      "base45",
+      "base64"
+    ],
+    "time_s": 2.292,
+    "input_len": 71
+  },
+  {
+    "tier": "extreme",
+    "input": "00110101001100100011001000110010001100100110001000110101011001010011001101100110001100100110010100110010001100110011010101100010001100100110001000110010011001010011010101100110001101010011100100110101001110000011001000110010001100100110001000110101001100100011010100110011001100110110000100110101011001000011010100111001001101010011001000110010001100100011001001100010001101010011001000110010011000100011010101100001001100110011100000110010001100000011010101100001001100100011000100110010001100110011001001100010001101010011001000110010011001010011010100111000001101010011100100110010001100110011001000110011001100110110000100110010001101110011010100110010001100100110010100110101001100100011010100111001001101010110001100110010001110010011001000110011001101010011100100110101011000110011010101100001",
+    "expected": "operator:9876543210",
+    "true_chain": [
+      "base32hex",
+      "base32hex",
+      "xor_singlebyte",
+      "base2"
+    ],
+    "mode": "exact",
+    "n_candidates": 1968,
+    "rank": -1,
+    "top1_text": "teses#t r/s sdt#s#s t/tntoses#tetdr$t!tnteses#tes#t$rosgt$sfsds#tes totnsdsdr$s`tes tetnt\"snsdtnt\"t$",
+    "top1_chain": [
+      "base2",
+      "rot8",
+      "xor_multibyte",
+      "xor_multikey"
+    ],
+    "time_s": 4152.984,
+    "input_len": 800
+  },
+  {
+    "tier": "extreme",
+    "input": ",r.qhA7[LYDa?ZT<,F@6;Fa#c1\"iP^=[>>>137(Z6.#&W6dOE50s]5p0sf4[EC)rg0s[e&0se2k=`.er2W_WV6.\"3m2;GCgG\"k3D3S8'f:,tU;0s[e&0t+jUD^@7-",
+    "expected": "ขขขขขขขขขขขข",
+    "true_chain": [
+      "thai_polybius",
+      "xz",
+      "url",
+      "ascii85",
+      "rot5"
+    ],
+    "mode": "exact",
+    "n_candidates": 881,
+    "rank": -1,
+    "top1_text": "Ta$vBC`ç3}}}vK`;t%}E`Ù©Ý{}}}a7E[}Ðîß!ÏØÒ`²Ò`³Ð^5~}s`²©Ì`³³-{2C=eå½°}Ð×\rdÜ¯Ù:+nÊhØH\u001eph}s`²©Ì`¶¿á3Tcí",
+    "top1_chain": [
+      "ascii85",
+      "rot13",
+      "rot47"
+    ],
+    "time_s": 2.114,
+    "input_len": 125
+  },
+  {
+    "tier": "extreme",
+    "input": "2d51162c242150200c320a264a1d3d2813345326282737245134011c0a263608531027121452563c5d0d2b0416243732220c232e241c15265d2a0b23165656295d3d2f29264e12272c2d034e36120334342410533d28542c11260b100a22212e202000210e0d082a1d22371f0957371d145c1f160d53374e3657012f3128140b370b3f322a3011095c5324332351280c5c365006140f24532b312a0e005215065c063d0c371222020c283024560b01522253030e1635524a5d0629551d1d5d20510f331d0f24242424245858",
+    "expected": "{\"user\":\"admin\",\"password\":\"P@ssw0rd\"}",
+    "true_chain": [
+      "ascii85",
+      "xz",
+      "gzip",
+      "xor_singlebyte"
+    ],
+    "mode": "exact",
+    "n_candidates": 1137,
+    "rank": -1,
+    "top1_text": "<1<10606060606f4~577f45146~1~5~511b4~1s0611725e47471666154|4210647<6}464666537}4~724}124156144e4s657|67106f405244127}1}4<65176770671}1E547s667f7|437|405<657f6543127e03771~425f5}105~53731O53766~5s6<4~4e456444646e65666s445|42655}601<6~77145060707746527e074~6}63665e026o6~7~1b1212576|4s6~12615}506e676}4666737062504|6~4~1}721610565364571<42726s4}5540751063736<626710775<6~7~5s026s467}446415606}62551~6",
+    "top1_chain": [
+      "rot4",
+      "xor_multibyte",
+      "reverse",
+      "quoted_printable"
+    ],
+    "time_s": 4160.77,
+    "input_len": 408
+  }
+]
