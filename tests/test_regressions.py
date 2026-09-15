@@ -1,6 +1,10 @@
 import importlib
 import unittest
 import base64
+import json
+import subprocess
+import sys
+from pathlib import Path
 
 from core.engine import auto_decode
 from core.registry import get_all_decoders
@@ -10,6 +14,8 @@ from decoders import base_decoders
 
 
 class RegressionTests(unittest.TestCase):
+    ROOT = Path(__file__).resolve().parent.parent
+
     def test_base64url_preserves_urlsafe_chars(self) -> None:
         original = "\x03\xe0"
         payload = "A-A="
@@ -52,6 +58,15 @@ class RegressionTests(unittest.TestCase):
         candidates = auto_decode(payload, max_depth=4, beam_size=50)
         self.assertTrue(candidates)
         self.assertEqual(candidates[0].text, 'ABC')
+
+    def test_cli_supports_stdin_scheme_filter_and_confidence(self) -> None:
+        proc = subprocess.run(
+            [sys.executable, str(self.ROOT / 'TEAM-DECODE.py'), '--stdin', '--json', '--scheme', 'base64'],
+            input='SGVsbG8=', text=True, capture_output=True, cwd=self.ROOT, check=True,
+        )
+        result = json.loads(proc.stdout)
+        self.assertEqual(result['winner']['text'], 'Hello')
+        self.assertEqual(result['winner']['confidence'], 'high')
 
 
 if __name__ == "__main__":

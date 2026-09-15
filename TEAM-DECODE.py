@@ -89,10 +89,20 @@ def _get_crypto_hint(winner: Candidate, raw_input: str | None) -> str | None:
     hint = detect_likely_block_cipher(winner.text) if not winner.chain else None
     return detect_likely_block_cipher(raw_input) if (hint is None and raw_input is not None) else hint
 
+def confidence_label(candidates: list[Candidate]) -> str:
+    if len(candidates) < 2:
+        return "high" if candidates else "unknown"
+    gap = candidates[0].score - candidates[1].score
+    if gap >= 8.0:
+        return "high"
+    if gap >= 3.0:
+        return "medium"
+    return "low"
+
 def format_result_json(candidates: list[Candidate], candidate_count: int = DEFAULT_CANDIDATE_COUNT, raw_input: str | None = None) -> dict:
     winner = candidates[0]
     return {
-        "winner": {"text": winner.text, "chain": list(winner.chain), "score": round(winner.score,4), "score_breakdown": _score_breakdown(winner.text)},
+        "winner": {"text": winner.text, "chain": list(winner.chain), "score": round(winner.score,4), "confidence": confidence_label(candidates), "score_breakdown": _score_breakdown(winner.text)},
         "candidates": [{"rank": i+1, "text": c.text, "chain": list(c.chain), "score": round(c.score,4)} for i,c in enumerate(candidates[:candidate_count])],
         "crypto_hint": _get_crypto_hint(winner, raw_input),
     }
@@ -100,7 +110,7 @@ def format_result_json(candidates: list[Candidate], candidate_count: int = DEFAU
 def print_result(candidates: list[Candidate], show_candidates: bool, candidate_count: int = DEFAULT_CANDIDATE_COUNT, raw_input: str | None = None) -> None:
     winner = candidates[0]
     chain = " -> ".join(winner.chain) if winner.chain else "(input looked already decoded)"
-    print(divider("Best Guess") + f"\n{green(winner.text)}\n\n{cyan('Decode chain: ')}{chain}\n{dim(f'Score: {winner.score:.2f}')}")
+    print(divider("Best Guess") + f"\n{green(winner.text)}\n\n{cyan('Decode chain: ')}{chain}\n{dim(f'Score: {winner.score:.2f} · Confidence: {confidence_label(candidates)}')}")
     if (crypto_hint := _get_crypto_hint(winner, raw_input)): print(f"\n{yellow(crypto_hint)}")
     if show_candidates:
         print("\n" + divider("Top Candidates"))
@@ -131,7 +141,8 @@ def read_payload(args: argparse.Namespace) -> str:
     if args.file:
         with open(args.file, "r", encoding="utf-8") as handle: return handle.read().strip()
     if args.value: return args.value
-    raise SystemExit("Provide an encoded value or use -f/--file.")
+    if args.stdin: return sys.stdin.read().strip()
+    raise SystemExit("Provide an encoded value, use -f/--file, or pass --stdin.")
 
 def run_interactive(max_depth: int, beam_size: int, show_candidates: bool) -> None:
     print_banner()
@@ -152,17 +163,22 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="God-Tier Auto-decode multi-layer encoded text.")
     parser.add_argument("value", nargs="?", help="Encoded text to decode")
     parser.add_argument("-f","--file", help="Read encoded text from a file")
+    parser.add_argument("--stdin", action="store_true", help="Read the payload from standard input")
+    parser.add_argument("--scheme", action="append", help="Restrict decoding to a scheme; repeat for multiple schemes")
     parser.add_argument("-m","--max-depth", type=int, default=DEFAULT_MAX_DEPTH, help="Maximum decode layers")
     parser.add_argument("-b","--beam-size", type=int, default=DEFAULT_BEAM_SIZE, help="Number of candidates to keep per layer")
     parser.add_argument("--show-candidates", action="store_true", help="Print top candidate results")
+    parser.add_argument("--max-results", type=int, default=10, help="Maximum candidates to print or include in JSON")
+    parser.add_argument("--explain", action="store_true", help="Print the winner score breakdown")
     parser.add_argument("--json", action="store_true", help="Print machine-readable JSON instead of human output")
     parser.add_argument("--verify", action="store_true", help="Re-rank candidates with the AI verifier (core/verifier_gbm.pkl)")
     args = parser.parse_args()
-    if not args.value and not args.file:
+    if not args.value and not args.file and not args.stdin:
         run_interactive(max_depth=args.max_depth, beam_size=args.beam_size, show_candidates=False); return
     payload = read_payload(args)
+    if not payload: raise SystemExit("Input payload is empty.")
     _on_prog = lambda depth, total, explored: (print_progress(depth, total, label=f"layer {depth}/{total} · {explored} explored") if not args.json else None)
-    candidates = auto_decode(payload, max_depth=args.max_depth, beam_size=args.beam_size, progress_callback=_on_prog)
+    candidates = auto_decode(payload, max_depth=args.max_depth, beam_size=args.beam_size, progress_callback=_on_prog, allowed_schemes=set(args.scheme) if args.scheme else None)
     if args.verify:
         from core.verifier import VerifierRanker
         verifier = VerifierRanker.load()
@@ -171,10 +187,11 @@ def main() -> None:
         elif not args.json:
             print(yellow("verifier model not found — run: python -m core.verifier benchmarks/reports/verifier_train.jsonl"))
     if not args.json:
-        clear_progress_line(); print_result(candidates, show_candidates=args.show_candidates, candidate_count=10, raw_input=payload)
+        clear_progress_line(); print_result(candidates, show_candidates=args.show_candidates, candidate_count=args.max_results, raw_input=payload)
+        if args.explain: print(json.dumps(_score_breakdown(candidates[0].text), ensure_ascii=False, indent=2))
     else:
         if sys.stdout.encoding.lower() != 'utf-8': sys.stdout.reconfigure(encoding='utf-8')
-        print(json.dumps(format_result_json(candidates, candidate_count=10, raw_input=payload), ensure_ascii=False, indent=2))
+        print(json.dumps(format_result_json(candidates, candidate_count=args.max_results, raw_input=payload), ensure_ascii=False, indent=2))
 
 if __name__ == "__main__":
     main()

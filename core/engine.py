@@ -56,7 +56,8 @@ def auto_decode_beam_search(
     value: str,
     max_depth: int = 15,
     beam_size: int = DEFAULT_BEAM_SIZE,
-    progress_callback: Callable[[int, int, int], None] | None = None
+    progress_callback: Callable[[int, int, int], None] | None = None,
+    allowed_schemes: set[str] | None = None,
 ) -> list[Candidate]:
     start = normalize_input(value)
     best: dict[str, Candidate] = {start: Candidate(text=start, chain=(), score=score_text(start))}
@@ -83,6 +84,8 @@ def auto_decode_beam_search(
         next_frontier: list[Candidate] = []
         for candidate in frontier:
             for scheme, decoded in decode_once(candidate.text, candidate.chain):
+                if allowed_schemes is not None and scheme not in allowed_schemes:
+                    continue
                 if decoded in best:
                     continue
                 if "\ufffd" in decoded:

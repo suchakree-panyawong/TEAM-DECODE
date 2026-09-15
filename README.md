@@ -113,6 +113,17 @@ python TEAM-DECODE.py "<encoded string>"
 python TEAM-DECODE.py -f encoded.txt
 ```
 
+### Read from stdin and restrict schemes
+
+```bash
+cat encoded.txt | python TEAM-DECODE.py --stdin --scheme base64 --json
+python TEAM-DECODE.py "SGVsbG8=" --scheme base64 --max-results 3 --explain
+```
+
+JSON output includes a `confidence` label (`high`, `medium`, or `low`) based on
+the score gap between the top candidates. Use `--show-candidates` to inspect
+the alternatives and `--max-results` to control how many are returned.
+
 ### ปรับความลึกและ beam size
 
 ```bash
